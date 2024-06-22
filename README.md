@@ -1,5 +1,9 @@
 # Gen-hub
 
+# Webpack
+## topLevelAwait experimental feature
+Webpack’s Module Federation feature complements topLevelAwait in micro frontend applications. Module Federation allows sharing code between micro frontends and dynamically loading remote modules. topLevelAwait can simplify the asynchronous loading and initialization of these dynamically imported modules.
+
 # NEXT JS
 ## getServerSideProps function 
 1. Function that can be used to fetch data and render the contents of a page at request time.
