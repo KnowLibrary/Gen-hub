@@ -29,7 +29,7 @@ export default function Page({ repo }) {
     </main>
   )
 }
-```Ne
+```
 
 ## getStaticProps (Static Site Generation)
 1. Next will pre-render the page at build time using the props returned by the function.
