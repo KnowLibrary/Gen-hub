@@ -8,7 +8,7 @@ topLevelAwait can simplify the asynchronous loading and initialization of these 
 
 * **import.meta.url**: returns the absolute file url of the module.
 * **output.publicPath**: Allows you to specify the base path for all the assets within your application.
-* **DefinePlugin**: Allow you to define:
+* **DefinePlugin**: Allows you to define:
   * Environment variables that are needed during the build process
   * Constants that remain constant during the compilation phase.
   * When defining values for process prefer 'process.env.NODE_ENV': JSON.stringify('production')
