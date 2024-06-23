@@ -2,13 +2,43 @@
 
 # Webpack
 ## topLevelAwait experimental feature
-Webpack’s Module Federation feature complements topLevelAwait in micro frontend applications. Module Federation allows sharing code between micro frontends and dynamically loading remote modules. topLevelAwait can simplify the asynchronous loading and initialization of these dynamically imported modules.
+Webpack’s **Module Federation** feature complements **topLevelAwait** in micro frontend applications. 
+Module Federation allows sharing code between micro frontends and dynamically loading remote modules. 
+topLevelAwait can simplify the asynchronous loading and initialization of these dynamically imported modules.
+
+* **import.meta.url**: returns the absolute file url of the module.
+* **output.publicPath**: Allows you to specify the base path for all the assets within your application.
+* **DefinePlugin**: Allow you to define:
+*                   environment variables that are needed during the build process
+*                   constants that remain constant during the compilation phase.
+*                   When defining values for process prefer 'process.env.NODE_ENV': JSON.stringify('production')
+```
+const webpack = require('webpack');
+
+module.exports = {
+  // other webpack configuration options
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production'), // Example of defining NODE_ENV as 'production'
+      API_URL: JSON.stringify('https://api.example.com'), // Example of defining an API URL constant
+    }),
+  ],
+};
+
+```
 
 # NEXT JS
-## getServerSideProps function 
-1. Function that can be used to fetch data and render the contents of a page at request time.
-2. Runs on the server.
-3. It can only be exported from a page. This means it should be exported from a file inside the pages directory alongside your React component that defines the page.
+
+## Environment Variables
+* In Next.js, **process.env** is available by default in the next.config.js 
+* Next.js automatically injects environment variables prefixed with NEXT_PUBLIC_ into the process.env object that is available at runtime.
+* To Create environment variables:
+  * In the root directory of your Next.js project create a **.env** file.
+  * You can create different **.env** files for different environments.
+  * Next.js automatically loads variables from .env files into process.env during development.
+  * Variable defined in .env file with prefix **NEXT_PUBLIC_** are exposed to the browser.
+  * Avoid committing .env files by listing then in your **.gitignore** file.
+      
 4. Returns JSON object that contains the **props**. 
 5. props passed to the page component can be viewed on the client as part of the initial HTML.
 6. If you do not need to fetch the data at request time, or would prefer to cache the data and pre-rendered HTML, we recommend using getStaticProps.
