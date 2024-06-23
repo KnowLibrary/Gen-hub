@@ -10,7 +10,6 @@ topLevelAwait can simplify the asynchronous loading and initialization of these 
 * **output.publicPath**: Allows you to specify the base path for all the assets within your application.
 * **DefinePlugin**: Allows you to define:
   * Environment variables that are needed during the build process
-  * Constants that remain constant during the compilation phase.
   * When defining values for process prefer 'process.env.NODE_ENV': JSON.stringify('production')
 ```
 const webpack = require('webpack');
@@ -31,13 +30,16 @@ module.exports = {
 
 ## Environment Variables
 * In Next.js, **process.env** is available by default in the next.config.js 
-* Next.js automatically injects environment variables prefixed with NEXT_PUBLIC_ into the process.env object that is available at runtime.
-* To Create environment variables:
+* Next.js automatically injects environment variables (in 9.4+ version) into the process.env object that is available at runtime.
+* To create environment variables:
   * In the root directory of your Next.js project create a **.env** file.
   * You can create different **.env** files for different environments.
   * Next.js automatically loads variables from .env files into process.env during development.
   * Variable defined in .env file with prefix **NEXT_PUBLIC_** are exposed to the browser.
   * Avoid committing .env files by listing then in your **.gitignore** file.
+  * Variables defined in .env are overridden by those defined in more environment specific .env files.
+  * .env.local is used to define environment variables that are specific to your local development environment.
+    
       
 4. Returns JSON object that contains the **props**. 
 5. props passed to the page component can be viewed on the client as part of the initial HTML.
