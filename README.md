@@ -108,6 +108,71 @@ function Profile() {
   )
 }
 ```
-
-
+## Server include in Next
+* **next dev** command starts a development start customized by Next.js and is based on **webpack-dev-server** concept.
+* **next start** command starts a production ready server customzied by Next.js and is based on **Node.js's http module**.
    
+
+## Custom Server (Available only in Page Router)
+You can use a Node.js express custom server to start the Next.js application.
+* Define server.js
+  ```
+  const { createServer } = require('http')
+  const { parse } = require('url')
+  const next = require('next')
+   
+  const dev = process.env.NODE_ENV !== 'production'
+  const hostname = 'localhost'
+  const port = 3000
+  // when using middleware `hostname` and `port` must be provided below
+  const app = next({ dev, hostname, port })
+  const handle = app.getRequestHandler()
+   
+  app.prepare().then(() => {
+    createServer(async (req, res) => {
+      try {
+        // Be sure to pass `true` as the second argument to `url.parse`.
+        // This tells it to parse the query portion of the URL.
+        const parsedUrl = parse(req.url, true)
+        const { pathname, query } = parsedUrl
+   
+        if (pathname === '/a') {
+          await app.render(req, res, '/a', query)
+        } else if (pathname === '/b') {
+          await app.render(req, res, '/b', query)
+        } else {
+          await handle(req, res, parsedUrl)
+        }
+      } catch (err) {
+        console.error('Error occurred handling', req.url, err)
+        res.statusCode = 500
+        res.end('internal server error')
+      }
+    })
+      .once('error', (err) => {
+        console.error(err)
+        process.exit(1)
+      })
+      .listen(port, () => {
+        console.log(`> Ready on http://${hostname}:${port}`)
+      })
+  })
+  ```
+* Update the scripts in package.json
+  ```
+  {
+   "scripts": {
+     "dev": "node server.js",
+     "build": "next build",
+     "start": "NODE_ENV=production node server.js"
+   }
+  }
+  ```
+* Custom server option is available only in Page Router functionality
+
+
+## Other details
+* The default port (3000) can be changed by using **PORT** environment variable.
+```
+PORT=4000 next dev
+```
