@@ -11,8 +11,8 @@
     * The dependent application will access the new version without any redeployment.
     * Code is shared as a component via Module federation  
 
-# Webpack
-## topLevelAwait experimental feature
+## Webpack
+### topLevelAwait experimental feature
 Webpack’s **Module Federation** feature complements **topLevelAwait** in micro frontend applications. 
 Module Federation allows sharing code between micro frontends and dynamically loading remote modules. 
 topLevelAwait can simplify the asynchronous loading and initialization of these dynamically imported modules.
