@@ -182,7 +182,7 @@ You can use a Node.js express custom server to start the Next.js application.
 * Custom server option is available only in Page Router functionality
 
 ## Steps to create Nextjs project 
-* Nextjs team recommends using create-next-app to setup project.
+* Nextjs team recommends using **create-next-app** to setup project.
 * To create project that usee page router feature:
   * Run: npx create-next-app@latest
   * Answer below prompts:
