@@ -200,3 +200,20 @@ You can use a Node.js express custom server to start the Next.js application.
 ```
 PORT=4000 next dev
 ```
+
+
+
+## Dynamically Load Micro Frontend
+```
+const loadDynamicScript = (url: string, globalName: string) => {
+  return new Promise<any>((resolve, reject) => {
+    script.src = url;
+    script: onerror = () => {
+     reject(new Error(`Failed to fetch remote: ${globalName}`));
+    }
+    script.onload = () => {}
+  
+  }
+
+}
+```
