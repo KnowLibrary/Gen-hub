@@ -248,7 +248,7 @@ const loadRemoteModule = (bundleFileName: string, basePath: string, moduleName: 
 
 ## Dynamically Load Micro Frontend (JS file)
 ```
-const loadDynamicScript = (url, globalName) => {
+const **loadDynamicScript** = (url, globalName) => {
     return new Promise<any>((resolve, reject) => {
         const script = document.createElement('script');
         script.src = url;
@@ -272,7 +272,7 @@ const loadDynamicScript = (url, globalName) => {
     })
 }
 
-const loadRemoteModule = (bundleFileName, basePath, moduleName) => async () => {
+const **loadRemoteModule** = (bundleFileName, basePath, moduleName) => async () => {
     const { hostName } = window.location.hostname;
     const url = `https://${hostName}/${basePath}/${bundleFileName}`;
 
