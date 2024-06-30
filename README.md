@@ -225,7 +225,7 @@ const loadDynamicScript = (url: string, globalName: string) => {
             }
             resolve(proxy);
         }
-        document.body.appendChild(script);
+        document.head.appendChild(script);
     })
 }
 
@@ -268,7 +268,7 @@ const loadDynamicScript = (url, globalName) => {
             }
             resolve(proxy);
         }
-        document.body.appendChild(script);
+        document.head.appendChild(script);
     })
 }
 
