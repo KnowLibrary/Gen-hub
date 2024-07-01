@@ -1,4 +1,16 @@
-# Webpack Module Federation Configuration
+# Webpack Module Federation
+
+Webpack Module Federation allows you to split your application into multiple bundles (or modules) that can be independently developed and deployed.
+
+## __webpack_init_sharing__
+
+__webpack_init_sharing__ is a function provided by Webpack 5's Module Federation feature. Its primary purpose is to facilitate the sharing of code between independently deployed applications or micro-frontends that are bundled using Webpack.
+
+__webpack_init_sharing__ enables modules to share code with each other dynamically at runtime, rather than statically at build time.
+
+This function is typically called with a **scope** name, which defines a boundary or namespace for shared modules.
+
+
 
 ## Dynamically Load Micro Frontend (JS file)
 ```
