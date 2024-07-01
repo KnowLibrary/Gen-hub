@@ -1,23 +1,39 @@
 # Webpack Module Federation
 
-Webpack Module Federation is a powerful feature introduced in Webpack 5 that enables developers to dynamically share modules across multiple applications at runtime. It allows you to build a system of micro-frontends where each part of your application is developed and deployed independently.
+* Webpack Module Federation is a powerful feature introduced in Webpack 5 that enables developers to dynamically share modules across multiple applications at runtime. It allows you to build a system of micro-frontends where each part of your application is developed and deployed independently.
 
-Each micro-frontend application is built independently using Webpack configuration.
+* Each micro-frontend application is built independently using Webpack configuration.
 
-Webpack Module Federation allows you to split your application into multiple bundles (or modules) 
+* Webpack Module Federation allows you to split your application into multiple bundles (or modules) 
 
-## __webpack_init_sharing__
+* A container in Module Federation is essentially a webpack build that exposes specific modules or chunks to be consumed remotely by other webpack builds. It acts as a provider of shared or standalone modules that can be dynamically loaded and used by remote applications.
 
-__webpack_init_sharing__ is a function provided by Webpack 5's Module Federation feature. Its primary purpose is to facilitate the sharing of code between independently deployed applications or micro-frontends that are bundled using Webpack.
+* The container specifies which modules or chunks are available for consumption by other webpack builds. These modules are typically defined in the **exposes** configuration of the webpack configuration
 
-__webpack_init_sharing__ enables modules to share code with each other dynamically at runtime, rather than statically at build time.
+* The **exposes** configuration in the Module Federation plugin (ModuleFederationPlugin) tells webpack which modules or chunks from the container should be made available for remote consumption. These modules are typically JavaScript files that export specific components, functions, or other resources.
 
-This function is typically called with a **scope** name, which defines a boundary or namespace for shared modules.
+* The modules specified in exposes are bundled into the container's output during webpack **build time**. This means webpack processes these modules to generate the necessary output files.
 
-__webpack_init_sharing__ returns a Promise that resolves to an object containing:
-- shareScope: A string representing the name of the scope under which modules are shared.
-- get(module: string): A function that asynchronously loads a shared module given its path.
+* While the modules themselves are bundled into the container’s build output during webpack build time, they are not "loaded" in the sense of being executed or consumed by other applications until runtime.
 
+* The **remote** configuration in the Module Federation plugin (ModuleFederationPlugin) of a consuming application specifies which remote containers to integrate modules from. 
+
+* During webpack build time of the consuming application, webpack processes the remote configuration to understand where to fetch remote modules from. It checks the specified URLs or paths to gather information about what modules are available remotely.
+
+* The actual loading of modules from remote containers occurs at runtime, not during build time. 
+
+* Containers can also define shared modules that they provide to ensure that multiple consuming applications use the same version of certain dependencies (**shared** configuration).
+
+* Containers also need to initialize module sharing (__webpack_init_sharing__) and define share scopes (__webpack_share_scopes__) to specify which modules are available and how to load them dynamically.
+
+* Every file in your project is a **Module**.
+* By using each other, the modules form a graph.
+* During the bundling process, modules are combined into **chunks**. 
+* Chunks combine into chunk groups and form a group interconnected through modules.
+* One chunk group with **main** default name get created.
+* Chunks come in two forms:
+  * **initial** is the main chunk for the entry point.
+  * **non-initial** is a chunk that may be lazy-loaded.
 
 ## Dynamically Load Micro Frontend (JS file)
 ```
