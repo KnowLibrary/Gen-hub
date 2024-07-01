@@ -1,6 +1,10 @@
 # Webpack Module Federation
 
-Webpack Module Federation allows you to split your application into multiple bundles (or modules) that can be independently developed and deployed.
+Webpack Module Federation is a powerful feature introduced in Webpack 5 that enables developers to dynamically share modules across multiple applications at runtime. It allows you to build a system of micro-frontends where each part of your application is developed and deployed independently.
+
+Each micro-frontend application is built independently using Webpack configuration.
+
+Webpack Module Federation allows you to split your application into multiple bundles (or modules) 
 
 ## __webpack_init_sharing__
 
@@ -10,6 +14,9 @@ __webpack_init_sharing__ enables modules to share code with each other dynamical
 
 This function is typically called with a **scope** name, which defines a boundary or namespace for shared modules.
 
+__webpack_init_sharing__ returns a Promise that resolves to an object containing:
+- shareScope: A string representing the name of the scope under which modules are shared.
+- get(module: string): A function that asynchronously loads a shared module given its path.
 
 
 ## Dynamically Load Micro Frontend (JS file)
